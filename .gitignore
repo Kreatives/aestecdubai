@@ -1,0 +1,9 @@
+# Editor / OS
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Tooling
+.claude/
+node_modules/
+.vercel
