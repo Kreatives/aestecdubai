@@ -2232,3 +2232,98 @@
 .ba-slider__img { background-size: 200% auto; }
 .ba-slider__after  { background-position: 100% 32%; }
 .ba-slider__before { background-position: 0% 32%; }
+
+
+/* ================================================================
+   v12 — Patient stories (listing + blog-style article)
+   ================================================================ */
+.stories { padding-block: var(--section-pad-y); background: var(--cream); }
+.stories__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 44px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+.story-card { display: flex; flex-direction: column; }
+.story-card__media {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-card);
+  margin-bottom: 20px;
+  transition: transform 0.35s var(--ease);
+}
+.story-card:hover .story-card__media { transform: translateY(-4px); }
+.story-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 24px);
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.story-card__line {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  max-width: 38ch;
+}
+.story-card__link {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.story-card:hover .story-card__link { color: var(--accent-dark); }
+.story-card__link svg { transition: transform 0.25s var(--ease); }
+.story-card:hover .story-card__link svg { transform: translateX(4px); }
+
+.story-article { padding-block: clamp(48px, 6vw, 80px) var(--section-pad-y); background: var(--cream); }
+.story-lead {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+.story-h {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.9vw, 25px);
+  font-weight: 400;
+  color: var(--ink);
+  margin: 40px 0 14px;
+}
+.story-p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.story-pull {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.4;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: clamp(20px, 2vw, 28px);
+  margin: clamp(36px, 4vw, 52px) 0;
+}
+.story-note {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mulish);
+  font-size: 13px;
+  color: var(--text-grey);
+}
+.story-back { margin-top: 8px; }
+@media (max-width: 1024px) { .stories__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .stories__grid { grid-template-columns: 1fr; } }
