@@ -2209,3 +2209,26 @@
   .position { grid-template-columns: 1fr; }
   .position__apply { grid-column: 1; grid-row: auto; margin-top: 14px; }
 }
+
+
+/* ================================================================
+   v10 — job hero (image frame) + centered job body column
+   ================================================================ */
+.page-hero__frame .page-crumb,
+.page-hero__frame .page-crumb a { color: rgba(249, 247, 242, 0.75); }
+.page-hero__frame .page-crumb a:hover { color: var(--cream); }
+.page-hero__frame .position__tag { border-color: rgba(249, 247, 242, 0.4); color: var(--cream); }
+.page-hero__frame .job-hero__meta { margin-top: 22px; }
+
+.job-body .container { max-width: 860px; }
+.job-body__intro { max-width: none; }
+.job-section { max-width: none; }
+
+
+/* ================================================================
+   v11 — before/after slider square (1:1), face-framed cover
+   ================================================================ */
+.ba-slider { aspect-ratio: 1 / 1; max-width: 480px; }
+.ba-slider__img { background-size: 200% auto; }
+.ba-slider__after  { background-position: 100% 32%; }
+.ba-slider__before { background-position: 0% 32%; }
