@@ -183,3 +183,24 @@
   modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
+
+
+/* ----------------------------------------------------------------
+   CAREERS — filter open positions by department
+   ---------------------------------------------------------------- */
+(function () {
+  var filter = document.querySelector('.positions__filter');
+  var list = document.querySelector('.position-list');
+  if (!filter || !list) return;
+  var btns = Array.from(filter.querySelectorAll('.ba-filter__btn'));
+  var items = Array.from(list.querySelectorAll('.position'));
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.dataset.filter;
+      btns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      items.forEach(function (it) {
+        it.classList.toggle('is-hidden', !(f === 'all' || it.dataset.type === f));
+      });
+    });
+  });
+})();

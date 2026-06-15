@@ -2226,3 +2226,44 @@ h1, h2, h3, h4 {
   color: var(--accent);
 }
 @media (max-width: 1024px) { .mega__inner { grid-template-columns: 1fr; } }
+
+
+/* ================================================================
+   TESTIMONIALS — horizontal review card (photo · stars+google · quote)
+   ================================================================ */
+.testimonial-card {
+  flex: 0 0 clamp(540px, 62vw, 660px);
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 22px;
+}
+.testimonial-card__media {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-soft);
+}
+.testimonial-card__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.testimonial-card__stars { color: #f6a800; letter-spacing: 2px; font-size: 14px; }
+.testimonial-card__rating { font-family: var(--font-mulish); font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+.testimonial-card__google { margin-left: auto; display: inline-flex; }
+.testimonial-card__quote {
+  font-family: var(--font-mulish);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.testimonial-card__name { font-family: var(--font-mulish); font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 2px; }
+.testimonial-card__role { font-family: var(--font-mulish); font-size: 13px; color: var(--text-grey); }
+@media (max-width: 640px) {
+  .testimonial-card { grid-template-columns: 120px 1fr; gap: 16px; flex-basis: 86vw; padding: 16px; }
+}
