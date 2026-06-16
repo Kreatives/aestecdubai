@@ -2267,3 +2267,169 @@ h1, h2, h3, h4 {
 @media (max-width: 640px) {
   .testimonial-card { grid-template-columns: 120px 1fr; gap: 16px; flex-basis: 86vw; padding: 16px; }
 }
+
+
+/* ================================================================
+   MOBILE / RESPONSIVE OVERHAUL
+   ================================================================ */
+
+/* Stronger bottom fade on the homepage hero for legibility */
+.hero-frame::before {
+  background: linear-gradient(to top,
+    rgba(18,18,18,0.92) 0%,
+    rgba(18,18,18,0.55) 28%,
+    rgba(18,18,18,0.18) 58%,
+    rgba(18,18,18,0.28) 100%);
+}
+
+/* ---- Credentials marquee ---- */
+.logos-marquee {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 6px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+}
+.logos-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  margin: 0; padding: 0;
+  list-style: none;
+  animation: logos-marquee 30s linear infinite;
+}
+@keyframes logos-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.logos-track__item {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.logos-track__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--taupe-dark); flex: 0 0 auto; }
+
+/* ---- Treatments mobile carousel tabs ---- */
+.card-tabs { display: none; }
+
+/* ---- Mobile menu (hamburger + drawer) ---- */
+.nav-burger { display: none; }
+.nav-mobile { display: none; }
+
+/* ---- Heritage: single portrait, tall on the right ---- */
+.heritage-cell-headline { grid-column: 1; grid-row: 1; }
+.heritage-cell-text { grid-column: 1; grid-row: 2; }
+.heritage-cell-portrait { grid-column: 2; grid-row: 1 / 3; align-self: stretch; }
+.heritage-image-large { aspect-ratio: auto; height: 100%; min-height: 460px; }
+
+
+@media (max-width: 1024px) {
+  /* show hamburger, hide desktop menu */
+  .nav-burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    flex-shrink: 0;
+    color: var(--ink);
+    margin-left: 4px;
+  }
+  .nav-burger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.3s var(--ease), opacity 0.2s var(--ease); }
+  body.menu-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+  body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    background: #fff;
+    padding: clamp(96px, 16vh, 132px) clamp(24px, 7vw, 44px) 48px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s var(--ease);
+  }
+  .nav-mobile.is-open { opacity: 1; visibility: visible; transform: none; }
+  .nav-mobile__inner { display: flex; flex-direction: column; max-width: 480px; }
+  .nav-mobile__label { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-grey); margin: 26px 0 4px; }
+  .nav-mobile__inner > .nav-mobile__label:first-child { margin-top: 0; }
+  .nav-mobile__link { font-family: var(--font-display); font-size: 24px; color: var(--ink); padding: 9px 0; }
+  .nav-mobile__sub { font-family: var(--font-body); font-size: 16px; color: var(--ink-soft); padding: 8px 0; }
+  .nav-mobile__cta { margin-top: 30px; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; padding: 15px 28px; background: var(--ink); color: var(--cream); border-radius: var(--radius-pill); font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+  body.menu-open { overflow: hidden; }
+
+  /* treatments carousel + tabs */
+  .card-tabs {
+    display: flex;
+    gap: 22px;
+    overflow-x: auto;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+    scrollbar-width: none;
+  }
+  .card-tabs::-webkit-scrollbar { display: none; }
+  .card-tab {
+    flex: 0 0 auto;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-grey);
+    padding-bottom: 8px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .card-tab.is-active { color: var(--ink); border-bottom-color: var(--ink); }
+
+  .treatments-row, .tx-overview__row {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-inline: calc(-1 * var(--container-pad));
+    padding-inline: var(--container-pad);
+    scrollbar-width: none;
+  }
+  .treatments-row::-webkit-scrollbar, .tx-overview__row::-webkit-scrollbar { display: none; }
+  .treatments-row > *, .tx-overview__row > * { flex: 0 0 80%; scroll-snap-align: start; }
+  .treatment-card { aspect-ratio: 3 / 4; }
+
+  /* text first, image second on stacked content sections */
+  .ultrasound-grid .ultrasound-image-wrap { order: 2; }
+  .ultrasound-grid .ultrasound-content { order: 1; }
+
+  /* heritage back to single column on mobile */
+  .heritage-cell-headline, .heritage-cell-text, .heritage-cell-portrait {
+    grid-column: 1; grid-row: auto; align-self: auto;
+  }
+  .heritage-image-large { aspect-ratio: 3 / 2; height: auto; min-height: 0; }
+}
+
+@media (max-width: 640px) {
+  /* testimonial card: photo on top, content below */
+  .testimonial-card { grid-template-columns: 1fr; flex-basis: 86vw; gap: 0; padding: 0; overflow: hidden; }
+  .testimonial-card__media { aspect-ratio: 4 / 3; border-radius: 0; }
+  .testimonial-card__body { padding: 22px 22px 24px; }
+}
+
+@media (max-width: 1024px) {
+  .nav-pill { justify-content: space-between !important; }
+  .nav-pill .nav-menu { display: none !important; }
+  .nav-burger { display: inline-flex !important; }
+}
+
+@media (max-width: 640px) {
+  .nav-pill {
+    left: 14px; right: 14px;
+    padding: 7px 10px 7px 18px;
+    gap: 8px;
+  }
+  .nav-burger { width: 40px; height: 40px; margin-left: 0; }
+  .nav-pill .nav-cta { display: none; }
+}

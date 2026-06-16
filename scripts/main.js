@@ -277,3 +277,59 @@
   }
 
 })();
+
+
+/* ----------------------------------------------------------------
+   MOBILE MENU — hamburger drawer
+   ---------------------------------------------------------------- */
+(function () {
+  var burger = document.getElementById('navBurger');
+  var menu = document.getElementById('navMobile');
+  if (!burger || !menu) return;
+  function setOpen(open) {
+    document.body.classList.toggle('menu-open', open);
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  burger.addEventListener('click', function () { setOpen(!menu.classList.contains('is-open')); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+})();
+
+
+/* ----------------------------------------------------------------
+   TREATMENTS — mobile carousel tabs (auto-built from card names)
+   ---------------------------------------------------------------- */
+(function () {
+  var rows = document.querySelectorAll('.treatments-row, .tx-overview__row');
+  rows.forEach(function (row) {
+    var cards = Array.prototype.slice.call(row.children).filter(function (c) { return c.querySelector && c.querySelector('.treatment-name'); });
+    if (cards.length < 2) return;
+    var tabs = document.createElement('div');
+    tabs.className = 'card-tabs';
+    var tabEls = [];
+    cards.forEach(function (card, i) {
+      var name = card.querySelector('.treatment-name').textContent.trim();
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'card-tab' + (i === 0 ? ' is-active' : '');
+      b.textContent = name;
+      b.addEventListener('click', function () { card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' }); });
+      tabs.appendChild(b);
+      tabEls.push(b);
+    });
+    row.parentNode.insertBefore(tabs, row);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            var idx = cards.indexOf(e.target);
+            tabEls.forEach(function (t, j) { t.classList.toggle('is-active', j === idx); });
+          }
+        });
+      }, { root: row, threshold: 0.6 });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+  });
+})();

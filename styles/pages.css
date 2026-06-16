@@ -2327,3 +2327,41 @@
 .story-back { margin-top: 8px; }
 @media (max-width: 1024px) { .stories__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) { .stories__grid { grid-template-columns: 1fr; } }
+
+
+/* ================================================================
+   v13 — mobile: stronger hero fade + text-first stacking
+   ================================================================ */
+.page-hero__frame::before {
+  background: linear-gradient(to top,
+    rgba(18,18,18,0.90) 0%,
+    rgba(18,18,18,0.52) 30%,
+    rgba(18,18,18,0.18) 62%,
+    rgba(18,18,18,0.28) 100%);
+}
+.tx-hero__frame::before {
+  background: linear-gradient(to top,
+    rgba(18,18,18,0.90) 0%,
+    rgba(18,18,18,0.55) 32%,
+    rgba(18,18,18,0.2) 64%,
+    rgba(18,18,18,0.3) 100%);
+}
+
+@media (max-width: 1024px) {
+  /* content sections: text first, image second */
+  .tx-method__grid .tx-method__media { order: 2; }
+  .tx-method__grid .tx-method__body { order: 1; }
+  .echo-band__grid .echo-band__media { order: 2; }
+  .echo-band__grid .echo-band__body-wrap { order: 1; }
+  .location-band__grid .location-band__media { order: 2; }
+  .location-band__grid .location-band__body { order: 1; }
+  .consult-location__grid .consult-location__media { order: 2; }
+  .consult-location__grid .consult-location__body { order: 1; }
+  .careers-hero__grid .careers-hero__media { order: 2; }
+  .careers-hero__grid .careers-hero__content { order: 1; }
+
+  /* treatment hero: text, then the before/after slider */
+  .tx-hero__grid .tx-hero__intro { order: 1; }
+  .tx-hero__grid .tx-hero__media { order: 2; }
+  .ba-slider { max-width: 100%; }
+}

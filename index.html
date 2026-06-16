@@ -70,12 +70,37 @@
       <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
       <li class="nav-item"><a href="consult.html#contact" class="nav-link">Contact</a></li>
     </ul>
-    <a href="consult.html" class="nav-cta">Book consultation
+    <a href="consult.html" class="nav-cta"><span class="nav-cta-text">Book consultation</span>
       <span class="nav-cta-arrow" aria-hidden="true">
         <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
     </a>
+      <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+        <span></span><span></span><span></span>
+      </button>
   </nav>
+
+  <!-- ====================== MOBILE MENU ====================== -->
+  <div class="nav-mobile" id="navMobile" aria-hidden="true">
+    <nav class="nav-mobile__inner" aria-label="Mobile">
+      <p class="nav-mobile__label">Treatments</p>
+      <a href="treatments.html" class="nav-mobile__link">All treatments</a>
+      <a href="treatment-aeslift.html" class="nav-mobile__sub">Aēslift™</a>
+      <a href="treatment-muscle-relaxers.html" class="nav-mobile__sub">Muscle relaxers</a>
+      <a href="treatment-fillers.html" class="nav-mobile__sub">Fillers</a>
+      <a href="treatment-profhilo.html" class="nav-mobile__sub">Profhilo®</a>
+      <p class="nav-mobile__label">Results</p>
+      <a href="before-after.html" class="nav-mobile__sub">Before &amp; after</a>
+      <a href="reviews.html" class="nav-mobile__sub">Reviews</a>
+      <a href="stories.html" class="nav-mobile__sub">Stories</a>
+      <p class="nav-mobile__label">More</p>
+      <a href="echography.html" class="nav-mobile__link">Echography</a>
+      <a href="pricing.html" class="nav-mobile__link">Pricing</a>
+      <a href="about.html" class="nav-mobile__link">About</a>
+      <a href="consult.html#contact" class="nav-mobile__link">Contact</a>
+      <a href="consult.html" class="nav-mobile__cta">Book consultation</a>
+    </nav>
+  </div>
 
 
   <!-- ====================== SECTION 1: HERO ====================== -->
@@ -149,17 +174,30 @@
           </div>
         </div>
 
-        <ul class="about-logos" aria-label="Certifications and partners">
-          <li>DHA-licensed</li>
-          <li class="dot" aria-hidden="true"></li>
-          <li>Allergan-certified</li>
-          <li class="dot" aria-hidden="true"></li>
-          <li>Ultrasound-guided</li>
-          <li class="dot" aria-hidden="true"></li>
-          <li>KNMG-registered</li>
-          <li class="dot" aria-hidden="true"></li>
-          <li>Merz Aesthetics partner</li>
+        <div class="logos-marquee" aria-label="Certifications and partners">
+        <ul class="logos-track">
+          <li class="logos-track__item">DHA-licensed</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Allergan-certified</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Ultrasound-guided</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">KNMG-registered</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Merz Aesthetics partner</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">DHA-licensed</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Allergan-certified</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Ultrasound-guided</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">KNMG-registered</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
+          <li class="logos-track__item">Merz Aesthetics partner</li>
+          <li class="logos-track__dot" aria-hidden="true"></li>
         </ul>
+      </div>
       </div>
 
     </div>
@@ -391,10 +429,6 @@
         <div class="heritage-cell heritage-cell-headline">
           <span class="pre-headline">Aēstec · Heritage</span>
           <h2 class="heritage-headline">A practice that began in Amsterdam, brought to Dubai.</h2>
-        </div>
-
-        <div class="heritage-cell heritage-cell-detail">
-          <div class="heritage-image-small" style="background-image: url('images/hero image/Aestec_12_Web resolution.webp');"></div>
         </div>
 
         <div class="heritage-cell heritage-cell-portrait">
