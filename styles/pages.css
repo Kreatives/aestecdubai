@@ -2409,3 +2409,14 @@
   .results-header { flex-direction: column; align-items: flex-start; gap: 14px; }
   .results-header .pill-link { white-space: nowrap; }
 }
+
+
+/* ================================================================
+   v15 — process timeline number (solid) + nav arrows on dark
+   ================================================================ */
+@media (max-width: 1024px) {
+  .tx-step__num { border-color: var(--accent); color: var(--accent); }
+  .tx-process .carousel-arrow { border-color: rgba(249, 247, 242, 0.35); color: var(--cream); }
+  .tx-process .carousel-arrow:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+  .tx-process .carousel-nav { margin-top: 4px; }
+}

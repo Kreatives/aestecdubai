@@ -2506,3 +2506,21 @@ h1, h2, h3, h4 {
   .results-grid .result-card { flex: 0 0 78%; scroll-snap-align: center; display: block !important; }
   .results-arrow { display: none; }
 }
+
+
+/* ================================================================
+   v15 — tabs sliding bar + carousel nav (dots above arrows)
+   ================================================================ */
+.card-tabs { position: relative; }
+.card-tab { border-bottom: none !important; }
+.card-tabs__track {
+  position: absolute; left: 0; bottom: 0; height: 2px;
+  background: var(--line-strong);
+}
+.card-tabs__bar {
+  position: absolute; left: 0; bottom: 0; height: 2px;
+  background: var(--ink);
+  transition: left 0.3s var(--ease), width 0.3s var(--ease);
+}
+.carousel-nav { flex-direction: column; gap: 16px; }
+.carousel-arrows { display: flex; align-items: center; justify-content: center; gap: 18px; }

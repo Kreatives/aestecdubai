@@ -299,7 +299,7 @@
 
 
 /* ----------------------------------------------------------------
-   TREATMENTS — mobile carousel tabs (auto-built from card names)
+   TREATMENTS — mobile carousel tabs with sliding indicator bar
    ---------------------------------------------------------------- */
 (function () {
   var rows = document.querySelectorAll('.treatments-row, .tx-overview__row');
@@ -319,14 +319,27 @@
       tabs.appendChild(b);
       tabEls.push(b);
     });
+    var track = document.createElement('span'); track.className = 'card-tabs__track';
+    var bar = document.createElement('span'); bar.className = 'card-tabs__bar';
+    tabs.appendChild(track); tabs.appendChild(bar);
     row.parentNode.insertBefore(tabs, row);
+
+    function moveBar(i) {
+      var t = tabEls[i]; if (!t) return;
+      track.style.width = tabs.scrollWidth + 'px';
+      bar.style.left = t.offsetLeft + 'px';
+      bar.style.width = t.offsetWidth + 'px';
+    }
+    function setActive(i) {
+      tabEls.forEach(function (t, j) { t.classList.toggle('is-active', j === i); });
+      moveBar(i);
+    }
+    setActive(0);
+    window.addEventListener('resize', function () { var a = tabEls.indexOf(document.querySelector('.card-tab.is-active')); moveBar(a < 0 ? 0 : a); });
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            var idx = cards.indexOf(e.target);
-            tabEls.forEach(function (t, j) { t.classList.toggle('is-active', j === idx); });
-          }
+          if (e.isIntersecting) { setActive(cards.indexOf(e.target)); }
         });
       }, { root: row, threshold: 0.6 });
       cards.forEach(function (c) { io.observe(c); });
@@ -336,7 +349,7 @@
 
 
 /* ----------------------------------------------------------------
-   MOBILE CAROUSELS — swipe + arrows/dots for testimonials & results
+   MOBILE CAROUSELS — swipe + arrows/dots (testimonials, results, process)
    ---------------------------------------------------------------- */
 (function () {
   if (!window.matchMedia('(max-width: 640px)').matches) return;
@@ -361,7 +374,6 @@
     var nav = document.createElement('div');
     nav.className = 'carousel-nav';
     var prev = arrow(-1), next = arrow(1), dots = null;
-    nav.appendChild(prev);
     if (useDots) {
       dots = document.createElement('div');
       dots.className = 'carousel-dots';
@@ -372,7 +384,10 @@
       });
       nav.appendChild(dots);
     }
-    nav.appendChild(next);
+    var arrows = document.createElement('div');
+    arrows.className = 'carousel-arrows';
+    arrows.appendChild(prev); arrows.appendChild(next);
+    nav.appendChild(arrows);
     navParent.appendChild(nav);
 
     function current() {
@@ -401,4 +416,5 @@
 
   carousel(document.querySelector('.testimonials-marquee'), '.testimonial-card', document.querySelector('.testimonials'), false);
   carousel(document.querySelector('.results-grid'), '.result-card', document.querySelector('.results-carousel'), true);
+  carousel(document.querySelector('.tx-process__row'), '.tx-step', document.querySelector('.tx-process .container'), false);
 })();
