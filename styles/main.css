@@ -473,7 +473,7 @@ h1, h2, h3, h4 {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px minmax(0, 1fr);
   gap: clamp(40px, 6vw, 96px);
   align-items: start;
 }
@@ -501,6 +501,7 @@ h1, h2, h3, h4 {
 .about-content {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .about-statement {
@@ -516,7 +517,7 @@ h1, h2, h3, h4 {
 
 .about-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 32px;
   padding-block: 36px;
   border-top: 1px solid var(--line);
@@ -2432,4 +2433,76 @@ h1, h2, h3, h4 {
   }
   .nav-burger { width: 40px; height: 40px; margin-left: 0; }
   .nav-pill .nav-cta { display: none; }
+}
+
+
+/* ================================================================
+   MOBILE v14 — carousels, drawer, instagram, sticky standards
+   ================================================================ */
+
+/* shared carousel nav (arrows + dots) */
+.carousel-nav { display: none; }
+.carousel-arrow {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink); background: transparent;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.carousel-arrow:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.carousel-arrow:disabled { opacity: 0.3; }
+.carousel-dots { display: flex; align-items: center; gap: 7px; }
+.carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(18,18,18,0.2); transition: width 0.25s var(--ease), background 0.25s var(--ease); }
+.carousel-dot.is-active { background: var(--ink); width: 20px; border-radius: 4px; }
+
+@media (max-width: 1024px) {
+  /* drawer truly full-screen + brand-orange CTA */
+  .nav-mobile { height: 100vh; height: 100dvh; overscroll-behavior: contain; }
+  .nav-mobile__cta { background: var(--accent); color: var(--ink); }
+  body.menu-open .book-cta { display: none; }
+
+  /* treatments carousel: first card aligned to heading (no edge bleed) */
+  .treatments-row, .tx-overview__row { margin-inline: 0; padding-inline: 0; }
+  .treatments-row > *, .tx-overview__row > * { flex-basis: 82%; }
+
+  /* standards: sticky stacking on mobile too */
+  .standard-row { position: sticky; top: 84px !important; }
+  .standard-row:nth-child(2) { top: 100px !important; }
+  .standard-row:nth-child(3) { top: 116px !important; }
+}
+
+@media (max-width: 640px) {
+  /* hero: breathing room under the nav */
+  .hero-frame { padding-top: 108px; }
+
+  /* instagram: full-bleed 3 x 2, no gaps */
+  .instagram-grid { grid-template-columns: repeat(3, 1fr); gap: 0; padding-inline: 0; }
+  .instagram-tile { border-radius: 0; }
+
+  .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 24px; }
+
+  /* testimonials: swipe + arrows (no marquee) */
+  .testimonials-marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask: none; mask: none;
+    scrollbar-width: none;
+  }
+  .testimonials-marquee::-webkit-scrollbar { display: none; }
+  .testimonials-track { animation: none !important; width: max-content; gap: 16px; padding-inline: var(--container-pad); }
+  .testimonial-card[aria-hidden="true"] { display: none; }
+  .testimonial-card { scroll-snap-align: center; }
+
+  /* homepage before/after: peek carousel + dots + arrows */
+  .results-carousel { padding-inline: 0; }
+  .results-grid {
+    display: flex; grid-template-columns: none;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    gap: 14px; padding-inline: 11%;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .results-grid::-webkit-scrollbar { display: none; }
+  .results-grid .result-card { flex: 0 0 78%; scroll-snap-align: center; display: block !important; }
+  .results-arrow { display: none; }
 }
